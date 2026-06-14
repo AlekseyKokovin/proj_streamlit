@@ -269,6 +269,69 @@ with tab4:
 
     c1, c2 = st.columns([1, 1.5])
 
+    with c1:
+        st.subheader("Pearson Correlation Test")
+        plot_df = filtered_df.copy()
+        plot_df['polarity_abs'] = plot_df['polarity_mean'].abs()
+
+        valid = plot_df[['subjectivity_mean', 'polarity_abs']].dropna()
+        if len(valid) > 1:
+            r, p = stats.pearsonr(valid['subjectivity_mean'], valid['polarity_abs'])
+            st.write(f"**Pearson r** between `subjectivity_mean` and absolute value of `polarity_mean`: **{r:.4f}**")
+            st.write(f"**p-value**: `{p:.4e}`")
+
+            if p < 0.05:
+                st.success(
+                    "**Significant positive relationship** — higher subjectivity leads to stronger sentiment polarity.")
+            else:
+                st.warning("⚠No significant correlation found in the current filtered data.")
+
+            st.markdown(f"""
+                **Interpretation**  
+                A positive correlation (r > 0) means that as news becomes more subjective/opinionated, the expressed sentiment tends to be more polarized — i.e., stronger positive *or* negative polarity.  
+                This supports the hypothesis that subjective news have greater emotional intensity.
+                """)
+        else:
+            st.warning("Not enough valid data points after applying filters for the correlation analysis.")
+
+    with c2:
+        st.subheader("Scatter Plot: Subjectivity vs Polarity Strength")
+        if len(valid) > 1:
+            fig, ax = plt.subplots(figsize=(10, 6))
+
+            sns.scatterplot(
+                data=plot_df,
+                x='subjectivity_mean',
+                y='polarity_abs',
+                alpha=0.55,
+                color='#3498db',
+                s=45,
+                ax=ax,
+                edgecolor='none',
+                label='Daily observations'
+            )
+
+            sns.regplot(
+                data=plot_df,
+                x='subjectivity_mean',
+                y='polarity_abs',
+                scatter=False,
+                color='#e74c3c',
+                line_kws={'linewidth': 3, 'label': f'Linear fit (r = {r:.3f})'},
+                ax=ax
+            )
+
+            ax.set_xlabel('Subjectivity Mean')
+            ax.set_ylabel('Absolute Polarity Mean')
+            ax.set_title('Does Higher Subjectivity Lead to Stronger Sentiment?', fontsize=13, fontweight='bold')
+            ax.legend(loc='upper left')
+            ax.grid(True, linestyle='--', alpha=0.4)
+            ax.spines[['top', 'right']].set_visible(False)
+
+            st.pyplot(fig)
+        else:
+            st.info("Insufficient data to render the scatter plot under current filters.")
+
 with tab5:
     st.header("Discussion and key insights")
     st.markdown("""
