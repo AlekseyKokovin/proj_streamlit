@@ -102,7 +102,7 @@ with tab3:
             error_y='std',
             color='subject',
             barmode='group',
-            category_orders={"relative_sentiment": ["Negative", "Neutral", "Positive"]},  # <- THE FIX
+            category_orders={"relative_sentiment": ["Negative", "Neutral", "Positive"]},
             title='BTC returns by relative sentiment and subject of news',
             color_discrete_sequence=px.colors.qualitative.Set2
         )
