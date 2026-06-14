@@ -6,7 +6,6 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import plotly.express as px
 
-st.set_page_config(page_icon=":==")
 full_df = df = pd.read_csv('full_df.csv')
 
 st.sidebar.title("Filters")
