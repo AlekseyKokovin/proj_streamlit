@@ -338,8 +338,7 @@ with tab5:
     - **Data Cleanup** Parsed sentiment strings and standardized dates/types. This is essential because raw data had dicts stored as strings.
     - **Descriptive Stats & Plots:** Showed central tendency and spread of sentiment and market reaction metrics. Used multiple plot types (hist, scatter, box+strip, bar) to give complete picture of distributions and relationships.
     - **Hypothesis Testing:** t-tests with Bonferroni correction. The box+strip plot visualizes both central tendency and individual data points.
-    **Limitations and Next Steps:**
-    - Daily aggregation may miss intra-day reactions.
+    - **Limitations and Next Steps:** Daily aggregation may miss intra-day reactions.
     """)
     csv = filtered_df.to_csv()
     st.download_button(label="Download full_df.csv", data=csv, file_name="full_df.csv")
