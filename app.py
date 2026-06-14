@@ -281,16 +281,15 @@ with tab4:
             st.write(f"**p-value**: `{p:.4e}`")
 
             if p < 0.05:
-                st.success(
-                    "**Significant positive relationship** — higher subjectivity leads to stronger sentiment polarity.")
+                if p < 0.05:
+                    if r > 0:
+                        st.success(
+                            "**Significant positive relationship** — higher subjectivity leads to stronger sentiment polarity.")
+                    elif r < 0:
+                        st.success(
+                            "** Significant NEGATIVE relationship** — higher subjectivity is linked to WEAKER emotional intensity.")
             else:
-                st.warning("⚠No significant correlation found in the current filtered data.")
-
-            st.markdown(f"""
-                **Interpretation**  
-                A positive correlation (r > 0) means that as news becomes more subjective/opinionated, the expressed sentiment tends to be more polarized — i.e., stronger positive *or* negative polarity.  
-                This supports the hypothesis that subjective news have greater emotional intensity.
-                """)
+                st.warning("No significant correlation found in the current filtered data.")
         else:
             st.warning("Not enough valid data points after applying filters for the correlation analysis.")
 
