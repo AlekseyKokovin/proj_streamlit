@@ -18,7 +18,8 @@ The application is structured into a sidebar for dynamic data filtering and five
     * Scatter plots comparing Blue-chip vs. Altcoin market reactions.
     * Violin distributions and Correlation heatmaps.
     * Timeline trends and subjectivity comparisons.
-* **Tab 4: Hypothesis Testing:** * **Altcoin Reactions:** Conducts pairwise T-tests with a Bonferroni correction to see if altcoin returns differ significantly by news type.
+* **Tab 4: Hypothesis Testing:**
+    * **Altcoin Reactions:** Conducts pairwise T-tests with a Bonferroni correction to see if altcoin returns differ significantly by news type.
     * **Subjectivity vs. Polarity:** Calculates the Pearson correlation to test if higher subjectivity leads to more extreme sentiment polarity.
 * **Tab 5: Discussion and Insights:** Summarizes the methodology, limitations, and offers a direct download link for the filtered dataset (`full_df.csv`).
 
